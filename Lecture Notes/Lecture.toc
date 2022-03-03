@@ -1,0 +1,2 @@
+\babel@toc {english}{}
+\contentsline {section}{Lecture~1}{i}{section*.2}%

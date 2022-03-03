@@ -1,0 +1,79 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+\title{Computer Simulations in Physics 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\makeindex
+\setlength\parindent{0pt}
+
+\addto\captionspolish{\renewcommand{\chaptername}{Lecture}}
+
+\newcommand{\ind}[1]{{\color{blue} #1\index{#1}}}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\newcounter{lec}
+
+\newenvironment{lecture}[1][]{\par\medskip
+   \noindent\chapter \rmfamily}{\medskip}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+\pagenumbering{roman}
+\maketitle
+\thispagestyle{empty}
+
+
+\begin{lecture}
+\textit{Python Introduction, very general}. 
+\href{https://www.fuw.edu.pl/~qba/cmpp2022}{Course website}\\
+\href{https://www.fuw.edu.pl/~qba/cmpp2022/lect1.pdf}{Lecture 1 presentation}\\
+Packages needed for the course:
+\begin{itemize}
+    \item NumPy
+    \item SciPy
+    \item MatPlotLib
+\end{itemize}
+Tools needed:
+\begin{itemize}
+    \item Python $>3.0$
+    \item Jupyter Notebook \textit{(optional)}
+\end{itemize}
+Interesting submodules of \emph{scipy}:
+\begin{itemize}
+    \item \verb|scipy.constants| - Physical constants
+    \item \verb|scipy.special| - Special Functions
+    \item \verb|scipy.integrate| - \verb|scipy.integrate.quad|  is an interface for \verb|QUADPACK| FORTRAN integration package
+\end{itemize}
+The presentations for tutorials: \href{https://www.fuw.edu.pl/~qba/cmpp2022/lab1a.pdf}{Basic Python Tutorial}
+\href{https://www.fuw.edu.pl/~qba/cmpp2022/lab1b.pdf}{Intro to NumPy and MatPlotLib}
+\end{lecture}
+
+\printindex
+
+
+
+\end{document}
