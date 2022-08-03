@@ -36,21 +36,20 @@
 
 \newcounter{lec}
 
-\newenvironment{lecture}[1][]{\par\medskip
-   \noindent\chapter \rmfamily}{\medskip}
+\newenvironment{lecture}[1]{\par\medskip
+   \noindent\chapter{#1} \rmfamily}{\medskip}
 
 \renewcommand{\emph}{\textbf}
 
 \begin{document}
-\pagenumbering{roman}
 \maketitle
 \thispagestyle{empty}
 
 
-\begin{lecture}
+\begin{lecture}{Python Introduction}
 \textit{Python Introduction, very general}.
 \href{https://www.fuw.edu.pl/~qba/cmpp2022}{Course website}\\
-\href{https://www.fuw.edu.pl/~qba/cmpp2022/lect1.pdf}{Lecture 1 presentation}\\
+\href{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lect1.pdf}{Lecture 1 presentation}\\
 Packages needed for the course:
 \begin{itemize}
     \item NumPy
@@ -68,8 +67,143 @@ Interesting submodules of \emph{scipy}:
     \item \verb|scipy.special| - Special Functions
     \item \verb|scipy.integrate| - \verb|scipy.integrate.quad|  is an interface for \verb|QUADPACK| FORTRAN integration package
 \end{itemize}
-The presentations for tutorials: \href{https://www.fuw.edu.pl/~qba/cmpp2022/lab1a.pdf}{Basic Python Tutorial}
-\href{https://www.fuw.edu.pl/~qba/cmpp2022/lab1b.pdf}{Intro to NumPy and MatPlotLib}
+The presentations for tutorials: \href{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lab1a.pdf}{Basic Python Tutorial}
+\href{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lab1b.pdf}{Intro to NumPy and MatPlotLib}
+\emph{Cheatsheets}:
+\begin{itemize}
+    \item \link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/python_cs.pdf}{Python Cheatsheet}
+    \item \link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/numpy_cs.pdf}{NumPy Cheatsheet}
+    \item \link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/matplot_cs.pdf}{Matplotlib Cheatsheet}
+\end{itemize}
+\end{lecture}
+
+\begin{lecture}{Complexity: Crackling noise, avalanches, and hysteresis}
+\section{Grading}
+\begin{itemize}
+    \item lecture and lab combined
+    \item one lab - 1.0 points for all excercises finished on the spot
+    \item bring the excercises next week - 0.8 points
+    \item Bonus, extra excercises (take-home), 0.2 points each
+    \item Pass - 50\% points
+    \item Presentation (5 min, obligatory) - i.e. presentation of last week results. - 1.0 point
+    \item Last week ($8-9.06$) final presentation time slot, and written exam (8 questions -  4 Daniel, 4 Tworzydło) - $8 \cdot 0.4 = 3.2$ pts, which accounts for 20\% of course points, 50\% needed for pass.
+\end{itemize}
+
+\section{Crackling}
+\begin{itemize}
+    \item The system responds through discrete interactions,
+    \item Events span a large range of sizes,
+    \item We only look at macroscopic effects, not the microscopic.
+\end{itemize}
+Crackling systems examples:
+\begin{itemize}
+    \item Fireplace
+    \item Earthquakes
+    \item Crampled Paper
+    \item Magnetic material in external field
+\end{itemize}
+
+\subsection{Earthquakes - \ind{\link{https://en.wikipedia.org/wiki/Gutenberg–Richter_law}{Gutenberg-Richter Law}}}
+The relation frequency versus magnitude:
+\[
+        N \propto 10^{-\alpha M} \propto E^{- \frac{2 \alpha}{3}}
+\]
+It's a power law, and they are realted to scale invariance.
+
+\section{Avalanches}
+
+Avalanches happen because the systems naturally end up at the critical point. "self organised criticality" (\link{https://en.wikipedia.org/wiki/Self-organized_criticality}{SOC}). It was formulated by Bak.\\
+
+\emph{Crackling studies in physics}, i.e. : Bubbles in foams, fluids in porous materials, fractures of discordered materials, fluctuations in stock markets, cascading failures in power grids.
+
+\subsection{Magnet with random fields}
+
+\link{https://sethna.lassp.cornell.edu/SimScience/crackling/Advanced/Magnets/BarkhausenExperiment.html}{Barkhausen noise experiment} - magnetic domains flipping in external $H(t)$, which is turned into electric signal, and audible through the speaker.\\
+
+What we will use here is a \emph{Random field \ind{\link{https://en.wikipedia.org/wiki/Ising_model}{Ising Model}}}. Its energy function is:
+\[
+    \mathcal{H} = - J \sum_{\ev{i, j}} s_i s_j - \sum_i (H(t) + h_j)s_i
+\]
+Its properties:
+\begin{itemize}
+    \item local, Gaussian distributed $h_j$ with std deviation $\sigma^2 = R$
+    \item As spins initially point down ($s_j = -1$)
+    \item The magnetic field $H(t)$ is slowly increasing, slowly enough for the system to reach the ground state
+    \item The spins only flip to decrease energy
+    \item It is all located on a 2D grid, with spind being the knots of the net
+    \item Magnetization lags behind the field - we get histeresis, formulated as a series of small, sharp jumps
+\end{itemize}
+\[
+    M = \frac{1}{c^2} \sum_i s_i
+\]
+
+\section{Lab Introduction}
+Process:
+\begin{itemize}
+    \item Each spin flips when it can get more energy
+    \item Local field $J \sum_{j(i)} s_j\footnote{neighbours of spin} + h_i + H(t)$ at site $i = (\cdot, \cdot)$ changes sign
+    \item Spin change can be trigerred by
+    \begin{itemize}
+        \item one of the neighboring flips
+        \item Increase of $H(t)$, to $H(t) = 0$
+    \end{itemize}
+\end{itemize}
+
+\link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lect2.pdf}{Lecture Slides}
+\link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lab2.pdf}{Labs Introduction}
+
+\end{lecture}
+
+% -----------------------------------------------------------------------
+% Wykład 17.03.2022
+
+\begin{lecture}{Computational Complexity once again}
+\section{Complexity Classes}
+Theory of computation - study how resources scale with size $N$ of the problem. IRL - what's the behavour of the least efficient part of algorithm when size goes to $N$\\
+\com{Paste graphic from Tworzydło slides}
+Problems with exponential time ($t \sim 2^N$) are called "looking for a needle in a haystack"
+\subsection{Boolean computing - SAT problems}
+Here we have two terms which will appear in this
+\begin{itemize}
+    \item CNF (\link{https://en.wikipedia.org/wiki/Conjunctive_normal_form}{Conjunctive normal form}) 
+    \item kSAT - SAT problem with at most $k$ variables
+\end{itemize}
+\emph{Profit?} We can reduce an exponential problem to a polynomial (here: quadratic) time problem
+
+\subsection{Spin Glass}
+The problem leading to spin glass mapping being a NP-complete problem is \link{https://en.wikipedia.org/wiki/Geometrical_frustration}{Geometrical Frustration}
+
+\link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lab3.pdf}{Lecture Slides} \link{http://studenci.fuw.edu.pl/~kc427902/CMCS_2022/lect3.pdf}{Lab notes}
+\end{lecture}
+
+% -----------------------------------------------------------------------
+% Wykład 24.03.2022
+
+\begin{lecture}{Introduction to active matter}
+    \emph{Active matter system types}\\
+    We divide them into two types:
+    \begin{itemize}
+        \item Coloid systems
+        \item Dry active matter systems
+    \end{itemize}
+     An example of dry active matter system is a one moving with \emph{Brownian Motion}. It is governed by \emph{The Langevin Equation}:
+     \[
+         m \ddot{x} = -\gamma \dot{x} + F(t)
+     \]
+     F(t) is a random force, we will assume it to be gaussian-distributed.
+     The mean squared displacement for particles will be:
+     \[
+         \ev{(x(t) - x(0))^2} \sim \frac{\alpha}{\gamma^2} t
+     \]
+     Today we will be modelling a very viscous system, therefore negating the term $m \ddot{x}$.
+\end{lecture}
+
+\link{https://sites.google.com/uw.edu.pl/cmpp2022}{New Webpage}
+
+For ex.2 Daniel recommends function \verb|scipy.spatial.KDTree|
+
+\begin{lecture}{Tissue modelling as particles}
+
 \end{lecture}
 
 \printindex
